@@ -1,0 +1,33 @@
+Class {
+	#name : 'IMAgent',
+	#superclass : 'CMAgent',
+	#category : 'Iriela-Model',
+	#package : 'Iriela-Model'
+}
+
+{ #category : 'control' }
+IMAgent >> move [ 
+	<action> 
+	self patch neighbourhood 
+		detect: [ :cell | cell hasResource ]
+		ifFound: [ :cell | self moveTo: cell ]
+		ifNone: [ self moveRandomly ]
+]
+
+{ #category : 'as yet unclassified' }
+IMAgent >> moveRandomly [ 
+	self randomWalk 
+]
+
+{ #category : 'accessing' }
+IMAgent >> pov [ 
+	<pov> 
+	^ CMPointOfView 
+		image: IMImages agent
+		size: 0.8
+]
+
+{ #category : 'control' }
+IMAgent >> step [ 
+	self move. 
+]
