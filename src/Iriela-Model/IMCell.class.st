@@ -1,6 +1,6 @@
 Class {
 	#name : 'IMCell',
-	#superclass : 'CMSpatialEntityElement',
+	#superclass : 'CMCell',
 	#category : 'Iriela-Model',
 	#package : 'Iriela-Model'
 }
