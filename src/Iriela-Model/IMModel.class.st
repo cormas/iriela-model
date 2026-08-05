@@ -46,6 +46,11 @@ IMModel >> assignCellStates [
 ]
 
 { #category : 'accessing' }
+IMModel >> fish [ 
+	^ [  ]
+]
+
+{ #category : 'accessing' }
 IMModel >> fishes [
 
 	^ fishes

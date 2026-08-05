@@ -2,7 +2,8 @@ Class {
 	#name : 'IMCell',
 	#superclass : 'CMCell',
 	#instVars : [
-		'state'
+		'state',
+		'cover'
 	],
 	#category : 'Iriela-Model',
 	#package : 'Iriela-Model'
@@ -39,6 +40,12 @@ IMCell >> hasResource [
 ]
 
 { #category : 'accessing' }
+IMCell >> initialize [ 
+	super initialize. 
+	cover := IMForestCover new. 
+]
+
+{ #category : 'accessing' }
 IMCell >> isNormal [
 	"Returns true if the cell is normal, returns false otherwise"
 
@@ -68,8 +75,8 @@ IMCell >> isSacred [
 IMCell >> pov [
 	<pov>
 	^ CMPointOfView new
-		color: self povColor;
-		borderColor: CMColor gray;
+		color: cover povColor;
+		borderColor: cover povBorderColor ;
 		yourself
 ]
 
@@ -79,11 +86,4 @@ IMCell >> povColor [
 	self isProtected ifTrue: [^CMColor yellow].
 	self isOffice ifTrue: [^CMColor blue].
 	^CMColor white.
-]
-
-{ #category : 'testing' }
-IMCell >> setState: aSymbol [
-	"Changes the state of the cell to a valid state, generates an error if the new state is invalid"
-	(#( #sacred #protected #normal #office) includes: aSymbol) ifFalse: [ self error: 'Invalid cell state: ' , aSymbol ].
-	state := aSymbol
 ]
