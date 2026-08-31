@@ -9,19 +9,11 @@ Class {
 }
 
 { #category : 'control' }
-IMAgent >> collectFish [
+IMAgent >> collect: anIMAgent [
 	<action>
 	self cell hasResource ifFalse: [ ^ self ].
-	(self cell occupantsOfClass: IMFish) ifEmpty: [ ^ self ].
-	(self cell occupantsOfClass: IMFish ) ifNotEmpty: [ :list | ^ list first die ].
-]
-
-{ #category : 'control' }
-IMAgent >> collectWood [
-	<action>
-	self cell hasResource ifFalse: [ ^ self ].
-	(self cell occupantsOfClass: IMWood) ifEmpty: [ ^ self ].
-	(self cell occupantsOfClass: IMWood ) ifNotEmpty: [ :list | ^ list first die ].
+	(self cell occupantsOfClass: anIMAgent ) ifEmpty: [ ^ self ].
+	(self cell occupantsOfClass: anIMAgent ) ifNotEmpty: [ :list | ^ list first die ].
 ]
 
 { #category : 'accessing' }
@@ -70,6 +62,6 @@ IMAgent >> reportFish [
 { #category : 'control' }
 IMAgent >> step [ 
 	self move. 
-	self collectFish . 
-	self collectWood .
+	self collect: IMWood . 
+	self collect: IMFish .
 ]
