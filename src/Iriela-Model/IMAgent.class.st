@@ -2,6 +2,7 @@ Class {
 	#name : 'IMAgent',
 	#superclass : 'CMAgent',
 	#instVars : [
+		'daysWithoutWood',
 		'hasLicense'
 	],
 	#category : 'Iriela-Model',
@@ -26,6 +27,17 @@ IMAgent >> hasLicense [
 IMAgent >> hasLicense: anObject [
 
 	hasLicense := anObject
+]
+
+{ #category : 'accessing' }
+IMAgent >> incrementDaysWithoutFood [ 
+	daysWithoutWood := daysWithoutWood + 1.
+]
+
+{ #category : 'accessing' }
+IMAgent >> initialize [ 
+	super initialize.
+	daysWithoutWood := 0.
 ]
 
 { #category : 'control' }
