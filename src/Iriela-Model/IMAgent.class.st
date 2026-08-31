@@ -11,6 +11,12 @@ Class {
 	#package : 'Iriela-Model'
 }
 
+{ #category : 'accessing' }
+IMAgent >> acquireLicense [ 
+	<action>
+	hasLicense := true.
+]
+
 { #category : 'control' }
 IMAgent >> collectFish [
 	<action>
@@ -45,12 +51,6 @@ IMAgent >> hasLicense [
 ]
 
 { #category : 'accessing' }
-IMAgent >> hasLicense: anObject [
-
-	hasLicense := anObject
-]
-
-{ #category : 'accessing' }
 IMAgent >> hasWood [
 
 	^ collectedWoods isNotEmpty .
@@ -67,6 +67,7 @@ IMAgent >> initialize [
 	daysWithoutWood := 0.
 	collectedFishes := OrderedCollection new. 
 	collectedWoods := OrderedCollection new.
+	hasLicense := false.
 ]
 
 { #category : 'control' }
@@ -89,6 +90,12 @@ IMAgent >> pov [
 	^ CMPointOfView 
 		tile: IMTileset agent
 		size: 0.8
+]
+
+{ #category : 'accessing' }
+IMAgent >> removeLicense [ 
+	<action>
+	hasLicense := false.
 ]
 
 { #category : 'control' }
