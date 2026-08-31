@@ -12,26 +12,26 @@ Class {
 { #category : 'accessing' }
 IMCell >> beNormal [
 	"Changes the state to normal"
-	self setState: #normal
+	state:= #normal
 ]
 
 { #category : 'accessing' }
 IMCell >> beOffice [
 	"Changes the state to be an office"
 
-	self setState: #office
+	state:= #office
 ]
 
 { #category : 'accessing' }
 IMCell >> beProtected [
 	"Changes the state of the cell to protected"
-	self setState: #protected
+	state:= #protected
 ]
 
 { #category : 'accessing' }
 IMCell >> beSacred [
 	"Changes the set of the cell to be sacred"
-	self setState: #sacred
+	state:= #sacred
 ]
 
 { #category : 'testing' }

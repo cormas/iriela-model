@@ -8,6 +8,14 @@ Class {
 	#package : 'Iriela-Model'
 }
 
+{ #category : 'control' }
+IMAgent >> collect [
+	<action>
+	self cell hasResource ifFalse: [ ^ self ].
+	(self cell occupantsOfClass: IMFish) ifNotEmpty: [ :list | ^ list first die ].
+	(self cell occupantsOfClass: IMWood) ifNotEmpty: [ :list | ^ list first die ]
+]
+
 { #category : 'accessing' }
 IMAgent >> hasLicense [
 
@@ -43,6 +51,16 @@ IMAgent >> pov [
 ]
 
 { #category : 'control' }
+IMAgent >> reportFish [
+	<action> 
+	self cell neighbourhood 
+		detect: [ :c | cell beOffice ]
+		ifFound: [ :c | [self moveTo: cell . self hasLicense: true ] ]
+		ifNone: [ self moveRandomly. self reportFish ]
+]
+
+{ #category : 'control' }
 IMAgent >> step [ 
 	self move. 
+	self collect.
 ]

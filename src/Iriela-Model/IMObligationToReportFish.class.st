@@ -8,8 +8,8 @@ Class {
 { #category : 'api - rules' }
 IMObligationToReportFish >> action [
 	"Return the method that should be observed. This is the action of the cormas model"
-
-	^ self agent reportFish.
+	"TODO: should be the action of report fish"
+	^ [].
 ]
 
 { #category : 'api - rules' }
