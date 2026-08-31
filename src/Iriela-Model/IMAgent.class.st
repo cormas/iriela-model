@@ -1,9 +1,24 @@
 Class {
 	#name : 'IMAgent',
 	#superclass : 'CMAgent',
+	#instVars : [
+		'hasLicense'
+	],
 	#category : 'Iriela-Model',
 	#package : 'Iriela-Model'
 }
+
+{ #category : 'accessing' }
+IMAgent >> hasLicense [
+
+	^ hasLicense
+]
+
+{ #category : 'accessing' }
+IMAgent >> hasLicense: anObject [
+
+	hasLicense := anObject
+]
 
 { #category : 'control' }
 IMAgent >> move [ 
