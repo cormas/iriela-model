@@ -3,18 +3,39 @@ Class {
 	#superclass : 'CMAgent',
 	#instVars : [
 		'daysWithoutWood',
-		'hasLicense'
+		'hasLicense',
+		'collectedFishes',
+		'collectedWoods'
 	],
 	#category : 'Iriela-Model',
 	#package : 'Iriela-Model'
 }
 
 { #category : 'control' }
-IMAgent >> collect: anIMAgent [
+IMAgent >> collectFish [
 	<action>
-	self cell hasResource ifFalse: [ ^ self ].
-	(self cell occupantsOfClass: anIMAgent ) ifEmpty: [ ^ self ].
+	(self cell occupantsOfClass: IMFish ) ifNotEmpty: [ :fishes | 
+		| fish |
+		fish := fishes first .
+		collectedFishes add: fish.
+		fish leave.
+	].
+]
+
+{ #category : 'control' }
+IMAgent >> collectResource: anIMAgent [
 	(self cell occupantsOfClass: anIMAgent ) ifNotEmpty: [ :list | ^ list first die ].
+]
+
+{ #category : 'control' }
+IMAgent >> collectWood [
+	<action>
+	(self cell occupantsOfClass: IMWood ) ifNotEmpty: [ :woods | 
+		| wood |
+		wood := woods first .
+		collectedWoods add: wood .
+		wood leave.
+	].
 ]
 
 { #category : 'accessing' }
@@ -30,6 +51,12 @@ IMAgent >> hasLicense: anObject [
 ]
 
 { #category : 'accessing' }
+IMAgent >> hasWood [
+
+	^ collectedWoods isNotEmpty .
+]
+
+{ #category : 'accessing' }
 IMAgent >> incrementDaysWithoutFood [ 
 	daysWithoutWood := daysWithoutWood + 1.
 ]
@@ -38,6 +65,8 @@ IMAgent >> incrementDaysWithoutFood [
 IMAgent >> initialize [ 
 	super initialize.
 	daysWithoutWood := 0.
+	collectedFishes := OrderedCollection new. 
+	collectedWoods := OrderedCollection new.
 ]
 
 { #category : 'control' }
@@ -74,6 +103,6 @@ IMAgent >> reportFish [
 { #category : 'control' }
 IMAgent >> step [ 
 	self move. 
-	self collect: IMWood . 
-	self collect: IMFish .
+	self collectFish .
+	self collectWood .
 ]
